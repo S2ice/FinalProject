@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Пользователи</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <link rel="stylesheet" href="/static/bootstrap-5.0.2-dist/css/bootstrap.css">
+        <title>Пользователи</title>
+        <style>
+            .form {
+                flex: 1;
+                padding: 20px;
+                border: 1px solid #ccc;
+                margin: 10px;
+            }
+
+            .golden-button {
+                background-color: gold;
+                color: white;
+            }
+        </style>
+    </head>
+<body>
+<div class="form">
+    <h2>Просмотр данных</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Заголовок</th>
+            <th>Основной текст</th>
+            <th>Дата создания</th>
+            <th>Категория</th>
+            <th>ID пользователя</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.lastname}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.email}"></td>
+            <td>
+                <a th:action="@{/moder/report/{id}(id=${user.userId})}" class="btn btn-primary" methods="get">Создать жалобу</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <form th:action="@{/admin/users/add}" method="get">
+        <button type="submit" class="btn btn-success">Добавить</button>
+    </form>
+</div>
+</body>
+<script src="/bootstrap-5.0.2-dist/js/bootstrap.js"></script>
+</html>

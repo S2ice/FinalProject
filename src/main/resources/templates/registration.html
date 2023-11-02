@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/bootstrap-5.0.2-dist/css/bootstrap.css">
+    <title>Регистрация</title>
+
+    <style>
+        body {
+            background-color: #f0f0f0; /* Светло-серый фон */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .auth-form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 300px;
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        .form-group {
+            margin: 10px 0;
+        }
+
+        .btn {
+            background-color: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div class="auth-form">
+    <h2>Регистрация</h2>
+
+    <div th:if="${message}" class="alert alert-danger">
+        <p>Пользователь уже существует</p>
+    </div>
+
+    <form th:action="@{/registration}" method="post">
+        <div class="form-group">
+            <input type="text" name="username" class="form-control" placeholder="Имя">
+        </div>
+        <div class="form-group">
+            <input type="text" name="email" class="form-control" placeholder="Почта">
+        </div>
+        <div class="form-group">
+            <input type="password" name="password" class="form-control" placeholder="Пароль">
+        </div>
+        <button class="btn btn-primary btn-block">Зарегистрироваться</button>
+        <p>Уже есть аккаунт? <a href="/login">Войти</a></p>
+    </form>
+</div>
+</body>
+<script src="/bootstrap-5.0.2-dist/js/bootstrap.js"></script>
+</html>

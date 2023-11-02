@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Административная страница</title>
+    <link rel="stylesheet" th:href="@{static/bootstrap-5.0.2-dist/css/bootstrap.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #000;
+        }
+
+        .icon {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .user-list {
+            text-align: center;
+        }
+
+        .user-list ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .user-list li {
+            margin: 10px 0;
+        }
+
+        .user-list a {
+            font-size: 18px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <img src="/static/blogger-logo.jpg" alt="Your Image" width="50" height="50" class="icon">
+</div>
+<div class="user-list">
+    <h1>Доступный список администратору</h1>
+    <ul>
+        <li><a href="/admin/user">Пользователи</a></li>
+        <li><a href="/admin/role">Пользователи и роли</a></li>
+        <li><a href="/admin/moderation">Модерация</a></li>
+        <li><a href="/admin/moderation">Посты</a></li>
+        <li><a href="/admin/moderation">Категория</a></li>
+        <li><a href="/admin/moderation">Заказчики</a></li>
+        <li><a href="/admin/moderation">Заказы</a></li>
+        <li><a href="/admin/moderation">Реклама</a></li>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" class="btn btn-warning">Выйти</button>
+        </form>
+    </ul>
+</div>
+</body>
+</html>

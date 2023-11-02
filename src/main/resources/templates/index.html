@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Главная страница</title>
+    <link rel="stylesheet" th:href="@{static/bootstrap-5.0.2-dist/css/bootstrap.css}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+        }
+
+        .header {
+            background-color: #ffffff;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .icon {
+            margin-right: 20px;
+        }
+
+        .icons-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .icon img {
+            width: 24px;
+            height: 24px;
+        }
+
+
+        .icon-home,
+        .icon-notification,
+        .icon-discover{
+            margin-right: 10px;
+        }
+
+        /* Логотип в центре */
+        .icon:last-child {
+            margin-left: auto;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+        }
+
+        search-container input {
+            background-color: #ccc;
+            border-radius: 20px;
+            padding: 10px 20px;
+            margin-right: 20px;
+        }
+
+
+        .icon-mail,
+        .icon-settings,
+        .icon-more {
+            margin-left: 10px;
+        }
+
+        .blue-background {
+            background-color: blue;
+            height: 160px;
+        }
+
+        .orange-background {
+            background-color: rgb(0,138,114);
+            padding: 20px;
+            color: white;
+        }
+
+        .grey-background {
+            background-color: rgb(245, 249, 250);
+            min-height: calc(100vh - 100px);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .white-box {
+            background-color: white;
+            padding: 20px;
+            text-align: center;
+            border: 2px solid black;
+        }
+
+        .positioned-square {
+            width: 200px;
+            height: 200px;
+            background-color: #ffffff;
+            position: absolute;
+            top: 140px;
+            left: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10%;
+        }
+
+        .positioned-square img {
+            width: 80%;
+            height: 80%;
+            border-radius: 10%;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        .edit-profile-button {
+            margin-right: 10px;
+        }
+
+        .text-under-square {
+            position: absolute;
+            left: 120px;
+            top: 350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+
+        .text-under-square p {
+            margin: 0;
+        }
+
+        .text-under-square img {
+            margin-top: 5px;
+        }
+
+    </style>
+</head>
+
+<body>
+<div class="header">
+    <div class="icons-container">
+        <div class="icon icon-home">
+            <img src="/static/home.svg" alt="Home Icon"> Домой
+        </div>
+        <div class="icon icon-notification">
+            <img src="/static/notification.svg" alt="Notification Icon"> Уведомления
+        </div>
+        <div class="icon icon-discover">
+            <img src="/static/hashtag.svg" alt="Hashtag Icon"> Интересное
+        </div>
+    </div>
+    <img src="/static/blogger-logo.jpg" alt="Your Image" width="50" height="50" class="icon">
+    <div class="search-container">
+        <input type="text" placeholder="Поиск...">
+        <div class="icon icon-mail">
+            <img src="/static/message.svg" alt="Message Icon">
+        </div>
+        <div class="icon icon-settings">
+            <img src="/static/settings.svg" alt="Settings Icon">
+        </div>
+        <div class="icon icon-more">
+            <img src="/static/notification.svg" alt="Notification Icon">
+        </div>
+    </div>
+</div>
+<div class="blue-background">
+</div>
+<div class="orange-background">
+    <div class="button-container">
+        <div class="edit-profile-button">
+            <button class="btn btn-primary">Редактировать профиль</button>
+        </div>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" class="btn btn-warning">Выйти</button>
+        </form>
+    </div>
+</div>
+<div class="grey-background">
+    <div class="positioned-square">
+        <img th:src="${user.photo}" alt="Your Image">
+    </div>
+    <div class="text-under-square">
+        <div>
+            <span th:if="${user.lastname != null and !user.lastname.isEmpty()}" th:text="${user.lastname}"></span>
+            <span th:if="${user.name != null and !user.name.isEmpty()}"> <span th:text="${user.name}"></span></span>
+        </div>
+        <p><span th:text="${user.username}"></span></p>
+        <p id="description" th:text="${user.description}"></p>
+        <div class="text-and-icons">
+            <div class="icon-and-text">
+                <img src="/static/location.svg" alt="City" width="15" height="15">
+                <span th:text="${user.address}"></span>
+            </div>
+            <div class="icon-and-text">
+                <img src="/static/date.svg" alt="Data" width="15" height="15">
+                <span th:text="${user.registration_date}"></span>
+            </div>
+        </div>
+    </div>
+    <form id="postForm" action="/createPost" method="post">
+        <div  class="white-box">
+            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                <input id="title" name="title" type="text" style="width: 100px; height: 25px; margin-bottom: 10px" placeholder="Заголовок">
+                <input id="content" name="content" type="text" style="width: 300px; height: 50px;" placeholder="Пост">
+                <button class="btn btn-primary" style="background-color: lightblue; margin-top: 10px;">Опубликовать</button>
+            </div>
+        </div>
+        <div th:if="${#lists.size(posts) == 0}" style="text-align: center">
+            <p>У вас пока нет постов.</p>
+        </div>
+        <div th:if="${not #lists.isEmpty(posts)}">
+        <div th:each="post : ${posts}" class="post-container" style="margin-top: 10px; border: 2px solid black;">
+            <div class="user-info">
+                <img th:src="${user.photo}" src="/static/user-avatar.jpg" alt="User Avatar" width="25" height="25">
+                <span th:text="${user.username}"></span>
+            </div>
+            <h4 th:text="${post.title}">Заголовок поста</h4>
+            <p th:text="${post.content}">Текст вашего поста здесь...</p>
+            <p th:text="${post.creation_date}">Дата создания</p>
+        </div>
+        </div>
+    </form>
+</div>
+</body>
+<script>
+    const description = document.getElementById("description");
+    const words = description.textContent.split(" ");
+    const wordLimit = 5;
+    const totalWordLimit = 22;
+
+    let newText = '';
+    let currentLine = '';
+    let wordCount = 0;
+
+    for (let i = 0; i < words.length; i++) {
+        currentLine += words[i] + ' ';
+        wordCount++;
+        if (wordCount > 0 && wordCount % wordLimit === 0) {
+            newText += currentLine + '<br>';
+            currentLine = '';
+        }
+        if (wordCount >= totalWordLimit) {
+            break;
+        }
+    }
+    newText += currentLine;
+    description.innerHTML = newText;
+</script>
+</html>

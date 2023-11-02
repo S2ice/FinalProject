@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Пользователи</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <link rel="stylesheet" href="/static/bootstrap-5.0.2-dist/css/bootstrap.css">
+        <title>Пользователи</title>
+        <style>
+            .form {
+                flex: 1;
+                padding: 20px;
+                border: 1px solid #ccc;
+                margin: 10px;
+            }
+
+            .golden-button {
+                background-color: gold;
+                color: white;
+            }
+        </style>
+    </head>
+<body>
+<div class="form">
+    <h2>Просмотр данных</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Псевдоним</th>
+            <th>Почта</th>
+            <th>Дата регистрации</th>
+            <th>Описание</th>
+            <th>Фото</th>
+            <th>Статус</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.lastname}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.registration_date}"></td>
+            <td th:text="${user.description}"></td>
+            <td><img th:src="${user.photo}" width="100" height="100"/></td>
+            <td th:text="${user.active ? 'Активен' : 'Забанен'}" th:class="${user.active ? 'text-success font-weight-bold' : 'text-danger font-weight-bold'}"></td>
+            <td>
+                <a th:href="@{/admin/users/edit/{id}(id=${user.userId})}" class="btn btn-primary">Редактировать</a>
+                <a th:href="@{/admin/users/delete/{id}(id = ${user.userId})}" class="btn btn-danger">Удалить</a>
+                <a th:if="${user.active}" th:href="@{/admin/users/block/{id}(id=${user.userId})}" class="btn btn-block golden-button">Заблокировать</a>
+                <a th:if="${!user.active}" th:href="@{/admin/users/unblock/{id}(id=${user.userId})}" class="btn btn-block golden-button">Разблокировать</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <form th:action="@{/admin/users/add}" method="get">
+        <button type="submit" class="btn btn-success">Добавить</button>
+    </form>
+</div>
+</body>
+<script src="/bootstrap-5.0.2-dist/js/bootstrap.js"></script>
+</html>

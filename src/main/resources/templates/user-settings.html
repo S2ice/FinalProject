@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Настройки пользователя</title>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        margin: 0;
+    }
+
+    .header {
+        background-color: #ffffff;
+        padding: 10px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .icon {
+        margin-right: 20px;
+    }
+
+    .icons-container {
+        display: flex;
+        align-items: center;
+    }
+
+    .icon img {
+        width: 24px;
+        height: 24px;
+    }
+
+    .icon-home{
+        margin-right: 10px;
+    }
+
+    .icon:last-child {
+        margin-left: auto;
+    }
+
+    .search-container {
+        display: flex;
+        align-items: center;
+    }
+
+    search-container input {
+        background-color: #ccc;
+        border-radius: 20px;
+        padding: 10px 20px;
+        margin-right: 20px;
+    }
+
+    .icon-more {
+        margin-left: 10px;
+    }
+
+    .settings {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 20px;
+    }
+
+    .settings label {
+        margin-bottom: 5px;
+    }
+
+    .settings input {
+        padding: 5px;
+        margin-bottom: 10px;
+    }
+
+</style>
+<body>
+<div class="header">
+    <div class="icons-container">
+        <div class="icon icon-home">
+            <button>Сохранить</button>
+        </div>
+    </div>
+    <img src="/static/blogger-logo.jpg" alt="Your Image" width="50" height="50" class="icon">
+    <div class="search-container">
+        <div class="icon icon-more">
+            <button>Удалить</button>
+        </div>
+    </div>
+</div>
+
+<div class="settings">
+    <label for="firstName">Имя:</label>
+    <input type="text" id="firstName">
+
+    <label for="lastName">Фамилия:</label>
+    <input type="text" id="lastName">
+
+    <label for="username">Имя пользователя:</label>
+    <input type="text" id="username">
+
+    <label for="password">Пароль:</label>
+    <input type="password" id="password">
+
+    <label for="address">Адрес:</label>
+    <input type="text" id="address">
+
+    <label for="image">Картинка (ссылка):</label>
+    <input type="text" id="image">
+
+    <label for="image">Описание:</label>
+    <input type="text" id="description">
+</div>
+</body>
+</html>
